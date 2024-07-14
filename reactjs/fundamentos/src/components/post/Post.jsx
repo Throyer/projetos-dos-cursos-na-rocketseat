@@ -4,19 +4,13 @@ import { createStyles } from "../../utils/css-modules-utils"
 
 import { Comment } from "../comment/comment";
 import { Avatar } from "../avatar/avatar";
-
-const Contents = {
-  'paragraph': ({ id, content }) => (
-    <p key={id}>{content}</p>
-  ),
-  'link': ({ id, content }) => (
-    <p key={id}><a href="#">{content}</a></p>
-  ),
-}
+import { Time } from "../time/time";
+import { Content } from "../content/content";
 
 const styles = createStyles(css);
 
-export const Post = ({ author, content, comments }) => {
+export const Post = ({ author, content, comments, publishedAt }) => {
+
   return (
     <article className={styles('post')}>
       <header>
@@ -29,12 +23,10 @@ export const Post = ({ author, content, comments }) => {
           </div>
         </div>
 
-        <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:30">Publicado há 1h</time>
+        <Time when={publishedAt} />
       </header>
 
-      <div className={styles('content')}>
-        {content.map(({ type, ...content }) => Contents[type](content))}
-      </div>
+      <Content content={content} />
 
       <form className={styles('comment-form')}>
         <strong>Deixe seu feedback</strong>
@@ -49,8 +41,8 @@ export const Post = ({ author, content, comments }) => {
       </form>
 
       <div className={styles('comment-list')}>
-        {comments.map(({ id, content, likes }) => (
-          <Comment key={id} content={content} likes={likes} />
+        {comments.map(({ id, content, likes, publishedAt }) => (
+          <Comment key={id} content={content} likes={likes} publishedAt={publishedAt} />
         ))}
       </div>
     </article>

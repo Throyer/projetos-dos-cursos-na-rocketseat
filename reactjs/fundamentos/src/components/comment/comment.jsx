@@ -3,10 +3,11 @@ import css from "./comment.module.css"
 import { createStyles } from "../../utils/css-modules-utils"
 import { ThumbsUp, Trash } from "@phosphor-icons/react";
 import { Avatar } from "../avatar/avatar";
+import { Time } from "../time/time";
 
 const styles = createStyles(css);
 
-export const Comment = ({ content, likes }) => {
+export const Comment = ({ content, likes, publishedAt }) => {
   return (
     <div className={styles('comment')}>
       <Avatar src="https://github.com/throyer.png" />
@@ -16,7 +17,7 @@ export const Comment = ({ content, likes }) => {
           <header>
             <div className={styles('author-and-time')}>
               <strong>Renato Henrique</strong>
-              <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:30">Cerca de 1h atrás</time>
+              <Time when={publishedAt} />
             </div>
 
             <button title="Remover comentário">
