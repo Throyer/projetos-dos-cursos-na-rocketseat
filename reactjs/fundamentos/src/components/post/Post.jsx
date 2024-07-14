@@ -29,7 +29,7 @@ export const Post = ({ author, content, comments: initialComments, publishedAt }
       author: me,
       content: comment,
       likes: 0,
-      publishedAt: new Date().toJSON()
+      publishedAt: new Date()
     }
 
     setComments((state => [...state, newComment]))
