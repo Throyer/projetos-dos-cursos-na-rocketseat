@@ -8,20 +8,30 @@ import { Comment } from "../comment/comment";
 import { Avatar } from "../avatar/avatar";
 import { Time } from "../time/time";
 import { Content } from "../content/content";
+import { Author } from "../../services/models/author";
+import { Content as ContentModel } from "../../services/models/content";
+import { Comment as CommentModel } from "../../services/models/comment";
 
 const styles = createStyles(css);
 
-const me = {
+const me: Author = {
   name: "Renato Henrique",
   avatar: "https://github.com/throyer.png",
   role: "Desenvolvedor Senior"
 }
 
-export const Post = ({ author, content, comments: initialComments, publishedAt }) => {
-  const [comments, setComments] = useState(initialComments);
+type PostProps = {
+  author: Author
+  content: ContentModel[];
+  comments: CommentModel[];
+  publishedAt: Date;
+}
+
+export const Post = ({ author, content, comments: initialComments, publishedAt }: PostProps) => {
+  const [comments, setComments] = useState<CommentModel[]>(initialComments);
   const [comment, setComment] = useState('');
 
-  const handleCreateNewComment = (event) => {
+  const handleCreateNewComment = (event: FormEvent) => {
     event.preventDefault();
 
     const newComment = {
@@ -36,16 +46,16 @@ export const Post = ({ author, content, comments: initialComments, publishedAt }
     setComment('');
   };
 
-  const handleCommentChange = ({ target }) => {
+  const handleCommentChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(target.value);
     target.setCustomValidity('');
   }
 
-  const handleDeleteComment = (deleted) => {
+  const handleDeleteComment = (deleted: string) => {
     setComments((state) => state.filter(comment => comment.id !== deleted))
   }
 
-  const handleCommentInvalid = ({ target }) => {
+  const handleCommentInvalid = ({ target }: InvalidEvent<HTMLTextAreaElement>) => {
     target.setCustomValidity('Forneça o comentario.')
   }
 

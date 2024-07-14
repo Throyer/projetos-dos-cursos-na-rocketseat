@@ -1,11 +1,16 @@
+import { ImgHTMLAttributes } from "react";
+
 import css from "./avatar.module.css";
+
 import classNames from "classnames";
 
 import { createStyles } from "../../utils/css-modules-utils";
 
 const styles = createStyles(css);
 
-export const Avatar = ({ border, src, ...props }) => {
+type AvatarProps = { border?: boolean; } & ImgHTMLAttributes<HTMLImageElement>
+
+export const Avatar = ({ border, src, ...props }: AvatarProps) => {
   return (
     <img
       src={src}      

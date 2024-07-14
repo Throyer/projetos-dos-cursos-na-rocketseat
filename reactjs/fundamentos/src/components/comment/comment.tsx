@@ -6,10 +6,20 @@ import { createStyles } from "../../utils/css-modules-utils"
 import { ThumbsUp, Trash } from "@phosphor-icons/react";
 import { Avatar } from "../avatar/avatar";
 import { Time } from "../time/time";
+import { Author } from "../../services/models/author";
 
 const styles = createStyles(css);
 
-export const Comment = ({ id, author, content, likes, publishedAt, onDelete }) => {
+type CommentProps = {
+  id: string;
+  author: Author;
+  content: string
+  likes: number;
+  publishedAt: Date;
+  onDelete: (id: string) => void;
+}
+
+export const Comment = ({ id, author, content, likes, publishedAt, onDelete }: CommentProps) => {
   const [likeCount, setLikeCount] = useState(likes);
 
   const handleIncreaseLikes = () => {
