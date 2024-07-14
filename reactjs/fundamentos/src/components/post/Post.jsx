@@ -42,7 +42,12 @@ export const Post = ({ author, content, comments, publishedAt }) => {
 
       <div className={styles('comment-list')}>
         {comments.map(({ id, content, likes, publishedAt }) => (
-          <Comment key={id} content={content} likes={likes} publishedAt={publishedAt} />
+          <Comment
+            key={id}
+            content={content}
+            likes={likes}
+            publishedAt={publishedAt}
+          />
         ))}
       </div>
     </article>
