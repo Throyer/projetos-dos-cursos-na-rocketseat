@@ -5,18 +5,27 @@ import { createStyles } from "../../utils/css-modules-utils"
 import { Comment } from "../comment/comment";
 import { Avatar } from "../avatar/avatar";
 
+const Contents = {
+  'paragraph': ({ id, content }) => (
+    <p key={id}>{content}</p>
+  ),
+  'link': ({ id, content }) => (
+    <p key={id}><a href="#">{content}</a></p>
+  ),
+}
+
 const styles = createStyles(css);
 
-export const Post = () => {
+export const Post = ({ author, content, comments }) => {
   return (
     <article className={styles('post')}>
       <header>
         <div className={styles('author')}>
-          <Avatar border src="https://github.com/throyer.png" />
+          <Avatar border src={author.avatar} />
 
           <div className={styles('author-info')}>
-            <strong>Renato Henrique</strong>
-            <span>Desenvolvedor Senior.</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
@@ -24,10 +33,7 @@ export const Post = () => {
       </header>
 
       <div className={styles('content')}>
-        <p>Fala galeraa</p>
-        <p>joojh</p>
-        <p>Batata</p>
-        <p>Fala galeraa </p>
+        {content.map(({ type, ...content }) => Contents[type](content))}
       </div>
 
       <form className={styles('comment-form')}>
@@ -43,9 +49,9 @@ export const Post = () => {
       </form>
 
       <div className={styles('comment-list')}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map(({ id, content, likes }) => (
+          <Comment key={id} content={content} likes={likes} />
+        ))}
       </div>
     </article>
   )

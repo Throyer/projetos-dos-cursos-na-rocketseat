@@ -6,7 +6,7 @@ import { Avatar } from "../avatar/avatar";
 
 const styles = createStyles(css);
 
-export const Comment = () => {
+export const Comment = ({ content, likes }) => {
   return (
     <div className={styles('comment')}>
       <Avatar src="https://github.com/throyer.png" />
@@ -24,13 +24,13 @@ export const Comment = () => {
             </button>
           </header>
 
-          <p>Muito bom Renato, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
 
         <footer>
           <button>
             <ThumbsUp />
-            Aplaudir <span>20</span>
+            Aplaudir <span>{likes}</span>
           </button>
         </footer>
       </div>
