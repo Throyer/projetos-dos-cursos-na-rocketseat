@@ -1,17 +1,22 @@
 import { PencilLine } from "@phosphor-icons/react";
-import styles from "./sidebar.module.css"
+
+import css from "./sidebar.module.css"
+
+import { createStyles } from "../../utils/css-modules-utils"
+
+const styles = createStyles(css);
 
 const cover = "https://pbs.twimg.com/profile_banners/503553062/1505825395";
 
 export const Sidebar = () => {
   return (
-    <aside className={styles.sidebar}>
+    <aside className={styles('sidebar')}>
       <img
-        className={styles.cover}
+        className={styles('cover')}
         src={cover}
       />
 
-      <div className={styles.profile}>
+      <div className={styles('profile')}>
         <img src="https://github.com/throyer.png" />
 
         <strong>Renato Henrique</strong>

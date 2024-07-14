@@ -23,7 +23,7 @@ export const Comment = () => {
             </button>
           </header>
 
-          <p>Muito bom Arrombado, parabéns!!</p>
+          <p>Muito bom Renato, parabéns!! 👏👏</p>
         </div>
 
         <footer>
