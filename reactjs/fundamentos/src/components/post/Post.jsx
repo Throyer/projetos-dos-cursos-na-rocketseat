@@ -3,6 +3,7 @@ import css from "./post.module.css"
 import { createStyles } from "../../utils/css-modules-utils"
 
 import { Comment } from "../comment/comment";
+import { Avatar } from "../avatar/avatar";
 
 const styles = createStyles(css);
 
@@ -11,7 +12,7 @@ export const Post = () => {
     <article className={styles('post')}>
       <header>
         <div className={styles('author')}>
-          <img src="https://github.com/throyer.png" />
+          <Avatar border src="https://github.com/throyer.png" />
 
           <div className={styles('author-info')}>
             <strong>Renato Henrique</strong>
