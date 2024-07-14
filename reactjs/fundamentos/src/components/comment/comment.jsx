@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import css from "./comment.module.css"
 
 import { createStyles } from "../../utils/css-modules-utils"
@@ -7,20 +9,30 @@ import { Time } from "../time/time";
 
 const styles = createStyles(css);
 
-export const Comment = ({ content, likes, publishedAt }) => {
+export const Comment = ({ id, author, content, likes, publishedAt, onDelete }) => {
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const handleIncreaseLikes = () => {
+    setLikeCount(state => state + 1);
+  }
+
+  const handleClickDelete = () => {
+    onDelete && onDelete(id);
+  }
+
   return (
     <div className={styles('comment')}>
-      <Avatar src="https://github.com/throyer.png" />
+      <Avatar src={author.avatar} />
 
       <div className={styles('comment-box')}>
         <div className={styles('comment-content')}>
           <header>
             <div className={styles('author-and-time')}>
-              <strong>Renato Henrique</strong>
+              <strong>{author.name}</strong>
               <Time when={publishedAt} />
             </div>
 
-            <button title="Remover comentário">
+            <button onClick={handleClickDelete} title="Remover comentário">
               <Trash size={20} />
             </button>
           </header>
@@ -29,9 +41,9 @@ export const Comment = ({ content, likes, publishedAt }) => {
         </div>
 
         <footer>
-          <button>
+          <button onClick={handleIncreaseLikes}>
             <ThumbsUp />
-            Aplaudir <span>{likes}</span>
+            Aplaudir <span>{likeCount}</span>
           </button>
         </footer>
       </div>

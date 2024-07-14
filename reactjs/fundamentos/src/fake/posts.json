@@ -40,6 +40,17 @@
         "content": "Muito bom Renato, parabéns!! 👏👏",
         "likes": 12,
         "publishedAt": "2024-07-14T19:23:25.810Z"
+      },
+      {
+        "id": "3eyfXEzT4NzbzOjXElLaS",
+        "author": {
+          "name": "Renato Henrique",
+          "avatar": "https://github.com/throyer.png",
+          "role": "Desenvolvedor Senior"
+        },
+        "content": "Obrigado José 👊",
+        "likes": 1,
+        "publishedAt": "2024-07-14T19:38:25.810Z"
       }
     ]
   },
@@ -68,6 +79,18 @@
         "content": "https://kind.sigs.k8s.io"
       }
     ],
-    "comments": []
+    "comments": [
+      {
+        "id": "3eyfXEzT4NzbzOjXElLaS",
+        "author": {
+          "name": "Renato Henrique",
+          "avatar": "https://github.com/throyer.png",
+          "role": "Desenvolvedor Senior"
+        },
+        "content": "Kubernetes é muito massa José, você vai adorar",
+        "likes": 1,
+        "publishedAt": "2024-07-14T19:22:25.810Z"
+      }
+    ]
   }
 ]
