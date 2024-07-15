@@ -1,0 +1,2 @@
+# Projetos dos cursos que eu fiz ou que estou fazendo na rocketseat
+esse repositorio é basicamente um backup das coisas que eu to aprendendo (ou que eu aprendi a muitos anos em trilhas mais antigas) de react js e react native nos cursos da rocketseat
