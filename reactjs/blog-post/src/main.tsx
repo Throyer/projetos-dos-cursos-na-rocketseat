@@ -4,7 +4,7 @@ import { App } from './app'
 
 import "./global.css"
 
-createRoot(document.querySelector('#root')).render(
+createRoot(document.querySelector('#root') as Element).render(
   <StrictMode>
     <App />
   </StrictMode>,
