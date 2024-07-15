@@ -92,5 +92,34 @@
         "publishedAt": "2024-07-14T19:22:25.810Z"
       }
     ]
+  },
+  {
+    "id": "i70EpMDAaXfv18_K8QLbV",
+    "author": {
+      "name": "Lucas Oliveira",
+      "avatar": "https://github.com/Domlcforce123.png",
+      "role": "Desenvolvedor jr"
+    },
+    "publishedAt": "2024-07-15T23:42:21.810Z",
+    "content": [
+      {
+        "id": "XL2YrmcxDxfsNyJLpkcwW",
+        "type": "paragraph",
+        "content": "Criei a minha primeira API REST Com java, ficou show de bola!"
+      }
+    ],
+    "comments": [
+      {
+        "id": "3eyfXEzT4NzbzOjXElLaS",
+        "author": {
+          "name": "Renato Henrique",
+          "avatar": "https://github.com/throyer.png",
+          "role": "Desenvolvedor Senior"
+        },
+        "content": "Spring boot é vida ❤️❤️",
+        "likes": 1,
+        "publishedAt": "2024-07-15T23:43:25.810Z"
+      }
+    ]
   }
 ]
