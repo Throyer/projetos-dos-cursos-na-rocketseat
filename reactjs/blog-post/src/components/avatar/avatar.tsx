@@ -1,10 +1,9 @@
 import { ImgHTMLAttributes } from "react";
+import classNames from "classnames";
 
 import css from "./avatar.module.css";
 
-import classNames from "classnames";
-
-import { createStyles } from "../../utils/css-modules-utils";
+import { createStyles } from "@utils/css-modules";
 
 const styles = createStyles(css);
 

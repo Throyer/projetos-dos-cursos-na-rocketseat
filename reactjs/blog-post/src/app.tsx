@@ -4,9 +4,8 @@ import { Header } from "./components/header/header";
 import { Sidebar } from "./components/sidebar/sidebar";
 import { Post } from "./components/post/Post";
 
-import { createStyles } from "./utils/css-modules-utils";
-
-import { findAllPosts } from "./services/posts/post-api";
+import { createStyles } from "@utils/css-modules";
+import { findAllPosts } from "@services/posts";
 
 const styles = createStyles(css);
 

@@ -1,12 +1,15 @@
 import { useState } from "react";
 
+import { ThumbsUp, Trash } from "@phosphor-icons/react";
+
 import css from "./comment.module.css"
 
-import { createStyles } from "../../utils/css-modules-utils"
-import { ThumbsUp, Trash } from "@phosphor-icons/react";
-import { Avatar } from "../avatar/avatar";
-import { Time } from "../time/time";
-import { Author } from "../../services/models/author";
+import { createStyles } from "@utils/css-modules"
+
+import { Avatar } from "@components/avatar/avatar";
+import { Time } from "@components/time/time";
+
+import { Author } from "@models/author";
 
 const styles = createStyles(css);
 
@@ -19,7 +22,15 @@ type CommentProps = {
   onDelete: (id: string) => void;
 }
 
-export const Comment = ({ id, author, content, likes, publishedAt, onDelete }: CommentProps) => {
+export const Comment = ({
+  id,
+  author,
+  content,
+  likes,
+  publishedAt,
+  onDelete
+}: CommentProps) => {
+  
   const [likeCount, setLikeCount] = useState(likes);
 
   const handleIncreaseLikes = () => {

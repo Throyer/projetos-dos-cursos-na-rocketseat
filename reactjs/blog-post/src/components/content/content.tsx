@@ -1,15 +1,20 @@
 import css from "./content.module.css"
 
-import { createStyles } from "../../utils/css-modules-utils"
+import { createStyles } from "@utils/css-modules"
+import { Content as ContentModel } from "@models/content";
 
 const styles = createStyles(css);
 
-export const Content = ({ content }) => {
+type ContentProps = {
+  content: ContentModel[]
+};
+
+export const Content = ({ content }: ContentProps) => {
   const elements = {
-    'paragraph': ({ id, content }) => (
+    'paragraph': ({ id, content }: Pick<ContentModel, "id"|"content">) => (
       <p key={id}>{content}</p>
     ),
-    'link': ({ id, content }) => (
+    'link': ({ id, content }: Pick<ContentModel, "id"|"content">) => (
       <p key={id}><a href="#">{content}</a></p>
     ),
   }

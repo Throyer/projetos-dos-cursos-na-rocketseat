@@ -1,7 +1,7 @@
 import css from "./header.module.css";
 
-import { logo } from "../../assets";
-import { createStyles } from "../../utils/css-modules-utils";
+import { logo } from "@assets/files";
+import { createStyles } from "@utils/css-modules";
 
 const styles = createStyles(css);
 

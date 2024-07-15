@@ -2,15 +2,16 @@ import { FormEvent, ChangeEvent, useState, InvalidEvent } from "react";
 
 import css from "./post.module.css"
 
-import { createStyles } from "../../utils/css-modules-utils"
+import { createStyles } from "@utils/css-modules"
 
-import { Comment } from "../comment/comment";
-import { Avatar } from "../avatar/avatar";
-import { Time } from "../time/time";
-import { Content } from "../content/content";
-import { Author } from "../../services/models/author";
-import { Content as ContentModel } from "../../services/models/content";
-import { Comment as CommentModel } from "../../services/models/comment";
+import { Comment } from "@components/comment/comment";
+import { Avatar } from "@components/avatar/avatar";
+import { Time } from "@components/time/time";
+import { Content } from "@components/content/content";
+
+import { Author } from "@models/author";
+import { Content as ContentModel } from "@models/content";
+import { Comment as CommentModel } from "@models/comment";
 
 const styles = createStyles(css);
 
