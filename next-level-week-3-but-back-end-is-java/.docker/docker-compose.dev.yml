@@ -1,0 +1,70 @@
+services:
+    database:
+      container_name: database
+      image: mongo:7
+      restart: unless-stopped
+      ports:
+        - "${DB_PORT}:27017"
+      environment:
+        TZ: "${TIMEZONE}"
+        MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME}"
+        MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD}"
+        MONGO_INITDB_DATABASE: "happy"
+      volumes:
+        - ./configurations/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        - ~/.volumes/happy/database/mongodb:/data/db
+
+    nginx:
+      container_name: http
+      image: nginx:latest
+      environment:
+        TZ: "${TIMEZONE}"
+      ports:
+        - "8000:80"
+      volumes:
+        - ./configurations/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./.volumes/images:/data/
+
+    sftp:
+      image: atmoz/sftp
+      container_name: sftp
+      expose:
+        - 22
+      command: foo:pass:1001:100:/data
+      volumes:
+        - ./.volumes/images:/home/foo/data
+
+    server:
+      container_name: happy-api
+      image: throyer/happy-api-dev:latest
+      build:
+        context: ./
+        dockerfile: Dockerfile.dev
+      depends_on:
+        - database
+        - sftp
+      ports:
+        - "8080:8080"
+        - "8181:8181"
+      tty: true
+      environment:
+        TZ: "${TIMEZONE}"
+        LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_DATA_MONGODB_CORE_MONGOTEMPLATE: "INFO"
+        DB_URI: "mongodb://root:root@database:27017/happy"
+        SFTP_HOST: "sftp"
+        SFTP_PORT: "22"
+        IMAGE_SERVER_HOST: http://localhost:8000
+      volumes:
+        - ../server:/app
+        - ~/.volumes/happy/.m2:/root/.m2
+      working_dir: /app
+      entrypoint: [
+        'dockerize',
+        '-wait',
+        'tcp://database:${DB_PORT}',
+        '-timeout',
+        '20s',
+        'mvn',
+        'spring-boot:run',
+        '-Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,address=*:8181,suspend=n"'
+      ]
