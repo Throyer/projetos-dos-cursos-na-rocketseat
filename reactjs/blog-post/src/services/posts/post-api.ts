@@ -11,5 +11,5 @@ export const findAllPosts = (): Post[] => {
       ...comment,
       publishedAt: new Date(comment.publishedAt),
     }))
-  }));;
+  }));
 }
