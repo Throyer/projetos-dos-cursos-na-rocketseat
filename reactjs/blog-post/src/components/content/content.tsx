@@ -1,27 +1,17 @@
 import css from "./content.module.css"
 
+import Markdown from 'react-markdown'
+
 import { createStyles } from "@utils/css-modules"
-import { Content as ContentModel } from "@models/content";
 
 const styles = createStyles(css);
 
-type ContentProps = {
-  content: ContentModel[]
-};
-
-export const Content = ({ content }: ContentProps) => {
-  const elements = {
-    'paragraph': ({ id, content }: Pick<ContentModel, "id"|"content">) => (
-      <p key={id}>{content}</p>
-    ),
-    'link': ({ id, content }: Pick<ContentModel, "id"|"content">) => (
-      <p key={id}><a href="#">{content}</a></p>
-    ),
-  }
-
+export const Content = ({ content }: { content: string }) => {
   return (
     <div className={styles('content')}>
-      {content.map(({ type, ...content }) => elements[type](content))}
+      <Markdown>
+        {content}
+      </Markdown>
     </div>
-  )
+  );
 }

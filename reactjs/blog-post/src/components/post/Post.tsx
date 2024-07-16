@@ -23,7 +23,7 @@ const me: Author = {
 
 type PostProps = {
   author: Author
-  content: ContentModel[];
+  content: string;
   comments: CommentModel[];
   publishedAt: Date;
 }
