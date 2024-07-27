@@ -119,7 +119,7 @@ atualizaTotalDeAcertos();
  * Criar novo elemento
  * @param {Questao} item
  * @param {number} questionIndex
- * @returns Node
+ * @returns {Node} node
  */
 const criarElementoHtmlDePergunta = (item, questionIndex) => {
   const { pergunta, respostas, correta } = item;
