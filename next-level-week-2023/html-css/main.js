@@ -144,9 +144,10 @@ const criarElementoHtmlDePergunta = (item, questionIndex) => {
     const input = dt.querySelector("input");
   
     span.textContent = resposta;
+
     input.setAttribute('name', `pergunta-${questionIndex}`);
     input.setAttribute('value', optionIndex);
-
+    
     input.onchange = (event) => {
       const estaCorreta = event.target.value == correta;
       
