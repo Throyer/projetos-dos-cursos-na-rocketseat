@@ -3,7 +3,7 @@ import { PencilLine } from "@phosphor-icons/react";
 import css from "./sidebar.module.css"
 
 import { createStyles } from "@utils/css-modules"
-import { Avatar } from "@components/avatar/avatar";
+import { Avatar } from "@components/avatar";
 
 const styles = createStyles(css);
 

@@ -4,14 +4,12 @@ import css from "./post.module.css"
 
 import { createStyles } from "@utils/css-modules"
 
-import { Comment } from "@components/comment/comment";
-import { Avatar } from "@components/avatar/avatar";
-import { Time } from "@components/time/time";
-import { Content } from "@components/content/content";
+import { Comment } from "@components/comment";
+import { Avatar } from "@components/avatar";
+import { Time } from "@components/time";
+import { Content } from "@components/content";
 
-import { Author } from "@models/author";
-import { Content as ContentModel } from "@models/content";
-import { Comment as CommentModel } from "@models/comment";
+import { Author, Comment as CommentModel } from "@services/models";
 
 const styles = createStyles(css);
 

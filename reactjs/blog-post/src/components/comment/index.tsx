@@ -6,10 +6,10 @@ import css from "./comment.module.css"
 
 import { createStyles } from "@utils/css-modules"
 
-import { Avatar } from "@components/avatar/avatar";
-import { Time } from "@components/time/time";
+import { Avatar } from "@components/avatar";
+import { Time } from "@components/time";
 
-import { Author } from "@models/author";
+import { Author } from "@services/models";
 
 const styles = createStyles(css);
 

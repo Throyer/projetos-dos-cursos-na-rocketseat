@@ -1,4 +1,5 @@
 import { ImgHTMLAttributes } from "react";
+
 import classNames from "classnames";
 
 import css from "./avatar.module.css";
