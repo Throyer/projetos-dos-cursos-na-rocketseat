@@ -1,6 +1,6 @@
 import { FormEvent, ChangeEvent, useState, InvalidEvent } from "react";
 
-import css from "./post.module.css"
+import css from "./post.module.css";
 
 import { createStyles } from "@utils/css-modules"
 
@@ -17,7 +17,7 @@ const me: Author = {
   name: "Renato Henrique",
   avatar: "https://github.com/throyer.png",
   role: "Desenvolvedor Senior"
-}
+};
 
 type PostProps = {
   author: Author
