@@ -49,6 +49,7 @@ export const Tasks = ({ tasks: initialTasks }: TasksProps) => {
       <Form onCreate={handleCreate} />
       <div className={styles("tasks")}>
         <Header total={tasks.length} done={doneTasks} />
+        
         {Boolean(tasks.length) && (
           <div className={styles("items")}>
             {tasks.map(({ id, title, done: isDone }) => (
