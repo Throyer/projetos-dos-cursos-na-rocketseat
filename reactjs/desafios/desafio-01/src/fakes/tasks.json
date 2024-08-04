@@ -1,12 +1,27 @@
 [
   {
-    "id": "K3By4rW4t9JtFq516",
-    "title": "Terminar o desafio",
+    "id": "1",
+    "title": "Configurar ambiente de desenvolvimento Java",
+    "done": true
+  },
+  {
+    "id": "2",
+    "title": "Escrever um programa Hello World",
+    "done": true
+  },
+  {
+    "id": "3",
+    "title": "Criar um programa que leia e escreva arquivos de texto",
     "done": false
   },
   {
-    "id": "L0LUSu7sVwVIOEwFo",
-    "title": "Comer pastel",
+    "id": "4",
+    "title": "Criar uma classe para representar um carro",
     "done": true
+  },
+  {
+    "id": "5",
+    "title": "Implementar um método para calcular a média de um array",
+    "done": false
   }
 ]

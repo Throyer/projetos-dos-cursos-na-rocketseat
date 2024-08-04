@@ -21,7 +21,7 @@ export const Item = ({ title, done, onRemove, onChange }: ItemProps) => {
     onRemove && onRemove();
   }
 
-  const handleToggle = () => {
+  const handleToggle = () => {    
     onChange && onChange(!done);
   }
 
