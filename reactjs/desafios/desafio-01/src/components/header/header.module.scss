@@ -1,8 +1,10 @@
 .header {
   display: flex;
-  justify-content: center;
+  flex: 1;
   align-items: center;
-  background: var(--gray-700);
+  justify-content: center;
+
+  padding: 5rem 0.625rem;
   
-  height: 200px;
+  background-color: var(--gray-700);
 }
