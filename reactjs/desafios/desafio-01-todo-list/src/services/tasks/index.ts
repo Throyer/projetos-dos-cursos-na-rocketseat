@@ -8,7 +8,7 @@ export const findAll = (): Page<Task> => {
     content: tasks,
     page: 0,
     size: 10,
-    totalElements: 2,
+    totalElements: 5,
     totalPages: 1
   }
 }
