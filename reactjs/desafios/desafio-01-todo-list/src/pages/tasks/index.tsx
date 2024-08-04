@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { createStyles } from "../../utils/css-modules";
+import { createStyles } from "@utils/css-modules";
 
 import { Form } from "./components/form";
 import { Header } from "./components/header";
 import { Item } from "./components/item";
 import { Empty } from "./components/empty";
 
-import { Task } from "../../services/tasks/task";
+import { Task } from "@services/tasks/task";
 
 import css from "./tasks.module.scss";
 

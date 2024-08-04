@@ -1,8 +1,8 @@
-import { Check, Trash } from "@phosphor-icons/react"
-
 import classNames from "classnames";
 
-import { createStyles } from "../../../../utils/css-modules";
+import { Check, Trash } from "@phosphor-icons/react"
+
+import { createStyles } from "@utils/css-modules";
 
 import css from "./item.module.scss";
 

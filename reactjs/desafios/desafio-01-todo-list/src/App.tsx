@@ -1,7 +1,6 @@
-import { Header } from "./components/header";
-
-import { Tasks } from "./pages/tasks";
-import { findAll } from "./services/tasks";
+import { Header } from "@components/header";
+import { Tasks } from "@pages/tasks";
+import { findAll } from "@services/tasks";
 
 export const App = () => {
   const page = findAll();

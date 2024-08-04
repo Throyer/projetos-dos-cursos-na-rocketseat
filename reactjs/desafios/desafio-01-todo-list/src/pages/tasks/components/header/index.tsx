@@ -1,4 +1,4 @@
-import { createStyles } from "../../../../utils/css-modules";
+import { createStyles } from "@utils/css-modules";
 
 import css from "./header.module.scss";
 

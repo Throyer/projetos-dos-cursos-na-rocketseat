@@ -1,5 +1,5 @@
-import { clipboard } from "../../../../assets/files";
-import { createStyles } from "../../../../utils/css-modules";
+import { clipboard } from "@assets/files";
+import { createStyles } from "@utils/css-modules";
 
 import css from "./empty.module.scss";
 

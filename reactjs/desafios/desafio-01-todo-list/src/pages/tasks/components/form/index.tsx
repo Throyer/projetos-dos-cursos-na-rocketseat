@@ -1,12 +1,15 @@
+import { useState, FormEvent } from "react";
+
 import { PlusCircle } from '@phosphor-icons/react'
 
-import { Input } from "../../../../components/input"
-import { createStyles } from "../../../../utils/css-modules";
+import { Input } from "@components/input"
+import { createStyles } from "@utils/css-modules";
+
+import { Task } from "@services/tasks/task";
+
+import { Button } from "@components/button";
 
 import css from "./form.module.scss";
-import { Button } from "../../../../components/button";
-import { Task } from "../../../../services/tasks/task";
-import { useState, FormEvent } from "react";
 
 const styles = createStyles(css);
 
