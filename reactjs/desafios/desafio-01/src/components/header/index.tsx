@@ -1,4 +1,4 @@
-import { logo } from "../../assets";
+import { logo } from "../../assets/files";
 import { createStyles } from "../../utils/css-modules";
 
 import css from "./header.module.scss";

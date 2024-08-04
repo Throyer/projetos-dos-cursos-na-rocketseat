@@ -1,4 +1,4 @@
-import { clipboard } from "../../../../assets/index";
+import { clipboard } from "../../../../assets/files";
 import { createStyles } from "../../../../utils/css-modules";
 
 import css from "./empty.module.scss";
