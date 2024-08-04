@@ -33,6 +33,10 @@ export const Tasks = ({ tasks: initialTasks }: TasksProps) => {
   }
 
   const handleRemove = (id: string) => {
+    if (!confirm('Deseja mesmo apagar essa tarefa?')) {
+      return
+    }
+
     setTasks(tasks => tasks.filter(task => task.id !== id));
   }
 
