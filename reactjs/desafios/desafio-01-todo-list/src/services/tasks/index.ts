@@ -1,14 +1,14 @@
-import { Page } from "./page";
 import { Task } from "./task";
+import { find, create, remove, update } from "./task-storage";
 
-import tasks from "../../fakes/tasks.json";
+const api = {
+  find, create, remove, update
+}
 
-export const findAll = (): Page<Task> => {
-  return {
-    content: tasks,
-    page: 0,
-    size: 10,
-    totalElements: 5,
-    totalPages: 1
-  }
+export type {
+  Task
+}
+
+export {
+  api
 }
