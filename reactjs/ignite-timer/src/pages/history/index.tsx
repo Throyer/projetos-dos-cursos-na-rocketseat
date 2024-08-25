@@ -1,5 +1,15 @@
+import * as Styles from "./styles"
+
 export const History = () => {
   return (
-    <h1>History wokrs!</h1>
+    <Styles.Container>
+      <h1>Meu Historico</h1>
+
+      <Styles.Content>
+        <table>
+          
+        </table>
+      </Styles.Content>
+    </Styles.Container>
   )
 }

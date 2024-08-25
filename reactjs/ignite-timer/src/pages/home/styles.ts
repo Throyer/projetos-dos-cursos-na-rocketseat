@@ -53,3 +53,62 @@ export const Separator = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const StartButton = styled.button`
+  width: 100%;
+  border: 0;
+  padding: 1rem;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  color: ${({ theme }) => theme['gray-100']};
+
+  &:not(:disabled):hover {
+    background: ${({ theme }) => theme['green-700']};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export const Input = styled.input`
+  background: transparent;
+  height: 2.5rem;
+  border: 0;
+  border-bottom: 2px solid ${({ theme }) => theme['gray-500']};
+
+  font-weight: bold;
+  font-size: 1.125rem;
+  padding: 0 0.5rem;
+  color: ${({ theme }) => theme['gray-100']};
+
+  &:focus {
+    box-shadow: none;
+    border-color: ${({ theme }) => theme['green-500']};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme['gray-500']};
+  }
+`;
+
+export const TaskInput = styled(Input)`
+  flex: 1;
+
+  &::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+`
+
+export const MinutesAmountInput = styled(Input)`
+  width: 4rem;
+`
