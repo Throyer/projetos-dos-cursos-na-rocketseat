@@ -20,7 +20,7 @@ export const Home = () => {
         <Styles.Countdown>
           <span>0</span>
           <span>0</span>
-          <Styles.Separator>:</Styles.Separator>
+          <Styles.Separator>{':'}</Styles.Separator>
           <span>0</span>
           <span>0</span>
         </Styles.Countdown>
