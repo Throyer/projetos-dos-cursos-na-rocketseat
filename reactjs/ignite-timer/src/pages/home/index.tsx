@@ -1,18 +1,15 @@
-import { HandPalm, Play } from "@phosphor-icons/react"
-import { FormProvider, useForm } from "react-hook-form"
-import { zodResolver } from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { HandPalm, Play } from "@phosphor-icons/react";
+import { FormProvider, useForm } from "react-hook-form";
 
 import * as Styles from "./styles";
 
 import { CreateCycleFormFields } from "./components/new-cycle-form/types";
 import { newCycleValidationSchema } from "./components/new-cycle-form/validations";
 
-import { Debug } from "@utils/debug";
+import { useCycles } from "../../contexts/cycles";
 import { Countdown } from "./components/countdown";
 import { NewCycleForm } from "./components/new-cycle-form";
-import { useCycles } from "../../contexts/cycles";
-
-
 
 export const Home = () => {
   const { currentCycle, createNewCycle, interruptCurrentCycle } = useCycles();
@@ -44,7 +41,6 @@ export const Home = () => {
 
   return (
     <Styles.Container>
-      <Debug content={{disableSubmitButton, hasActiveCycle}} />
       <form onSubmit={handleSubmit(handleCreateNewCycle)}>
           <FormProvider {...form}>
             <NewCycleForm />
