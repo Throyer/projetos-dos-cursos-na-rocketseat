@@ -1,4 +1,4 @@
-import { Play } from "@phosphor-icons/react"
+import { HandPalm, Play } from "@phosphor-icons/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -80,7 +80,26 @@ export const Home = () => {
   }, [currentCycle, minute, second])
 
   const title = watch('title');
-  const isSubmitDisabled = !title;
+  const minutes_amount = watch('minutes_amount');
+
+  const isSubmitDisabled = !title || !minutes_amount;
+
+  const handleInterruptCurrentCycle = () => {
+    if (currentCycle) {
+      setCycles(state => state.map(cycle => {
+        if (cycle.id !== currentCycle.id) {
+          return cycle;
+        }
+
+        cycle.status = 'Interrompido';
+        cycle.finished_at = new Date().toJSON();
+
+        return cycle;
+      }))
+
+      setCurrentCycleId(null);
+    }
+  }
 
   return (
     <Styles.Container>
@@ -91,8 +110,9 @@ export const Home = () => {
           <Styles.TaskInput
             id="task"
             type="text"
-            list="task-suggestions"
+            list="task-suggestions"            
             placeholder="Dê um nome para o seu projeto"
+            disabled={Boolean(currentCycle)}
             {...register('title')}
           />
 
@@ -111,6 +131,7 @@ export const Home = () => {
             step={5}
             min={5}
             max={60}
+            disabled={Boolean(currentCycle)}
             {...register('minutes_amount', { valueAsNumber: true })}
           />
 
@@ -125,10 +146,17 @@ export const Home = () => {
           <span>{second[1]}</span>
         </Styles.Countdown>
 
-        <Styles.StartButton disabled={isSubmitDisabled} type="submit">
-          <Play size={24} />
-          começar
-        </Styles.StartButton>
+        {!currentCycle ? (
+          <Styles.StartButton disabled={isSubmitDisabled} type="submit">
+            <Play size={24} />
+            Começar
+          </Styles.StartButton>
+        ):(
+          <Styles.StopButton disabled={!isSubmitDisabled} onClick={handleInterruptCurrentCycle} type="button">
+            <HandPalm size={24} />
+            Interromper
+          </Styles.StopButton>
+        )}
       </form>
     </Styles.Container>
   )

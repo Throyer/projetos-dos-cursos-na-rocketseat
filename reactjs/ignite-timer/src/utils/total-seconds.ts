@@ -10,5 +10,10 @@ export const totalSecondsInCycle = (cycle: Cycle | undefined): number => {
 
 export const remainingSecondsInCycle = (elapsedSeconds: number, cycle: Cycle | undefined): number => {
   const totalSeconds = totalSecondsInCycle(cycle);
+
+  if (totalSeconds === 0) {
+    return 0
+  }
+  
   return totalSeconds - elapsedSeconds;
 }
