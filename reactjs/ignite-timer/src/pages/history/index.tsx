@@ -3,7 +3,7 @@ import * as Styles from "./styles"
 const Statuses = {
   'Concluído': 'green',
   'Em andamento': 'yellow',
-  'Pendente': 'red'
+  'Interrompido': 'red'
 } as const
 
 const FAKE_ITENS = [
@@ -23,7 +23,7 @@ const FAKE_ITENS = [
     "id": 3,
     "title": "Tarefa 3",
     "started_at": "Há cerca de uma hora",
-    "status": "Pendente"
+    "status": "Interrompido"
   },
   {
     "id": 4,
