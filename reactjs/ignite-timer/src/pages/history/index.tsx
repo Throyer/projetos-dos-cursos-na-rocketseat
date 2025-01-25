@@ -8,31 +8,31 @@ const Statuses = {
 
 const FAKE_ITENS = [
   {
-    "id": 1,
+    "id": "1",
     "title": "Tarefa 1",
     "started_at": "Há cerca de duas horas",
     "status": "Concluído"
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "Tarefa 2",
     "started_at": "Há cerca de três horas",
     "status": "Em andamento"
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "Tarefa 3",
     "started_at": "Há cerca de uma hora",
     "status": "Interrompido"
   },
   {
-    "id": 4,
+    "id": "4",
     "title": "Tarefa 4",
     "started_at": "Há cerca de duas horas",
     "status": "Concluído"
   },
   {
-    "id": 5,
+    "id": "5",
     "title": "Tarefa 5",
     "started_at": "Há cerca de três horas",
     "status": "Em andamento"
@@ -42,7 +42,7 @@ const FAKE_ITENS = [
 export const History = () => {
   return (
     <Styles.Container>
-      <h1>Meu Historico</h1>
+      <h1>Meu Histórico</h1>
 
       <Styles.Content>
         <table>
