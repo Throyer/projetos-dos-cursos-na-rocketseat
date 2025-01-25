@@ -9,8 +9,9 @@ import { CreateCycleFormFields } from "./components/new-cycle-form/types";
 import { useEffect, useState } from "react";
 import { Cycle } from "./components/cycle";
 import { nanoid } from "nanoid";
-import { remainingSecondsInCycle } from "@utils/total-seconds";
+import { remainingSecondsInCycle, totalSecondsInCycle } from "@utils/total-seconds";
 import { differenceInSeconds } from "date-fns";
+import { Debug } from "@utils/debug";
 
 export const Home = () => {
   const [cycles, setCycles] = useState<Cycle[]>([]);
@@ -50,8 +51,26 @@ export const Home = () => {
       interval = setInterval(() => {
         const now = new Date();
         const start = new Date(currentCycle.started_at);
+        const difference = differenceInSeconds(now, start); 
 
-        setElapsedSeconds(differenceInSeconds(now, start));
+        if (difference >= totalSecondsInCycle(currentCycle)) {
+          setCycles(state => state.map(cycle => {
+            if (cycle.id !== currentCycle.id) {
+              return cycle;
+            }
+    
+            cycle.status = 'Concluído';
+            cycle.finished_at = new Date().toJSON();
+    
+            return cycle;
+          }))
+    
+          setCurrentCycleId(null);
+          clearInterval(interval);
+          return;
+        }
+
+        setElapsedSeconds(difference);
       }, 1000);
     }
 
@@ -92,7 +111,7 @@ export const Home = () => {
         }
 
         cycle.status = 'Interrompido';
-        cycle.finished_at = new Date().toJSON();
+        cycle.interrupted_at = new Date().toJSON();
 
         return cycle;
       }))
@@ -103,6 +122,7 @@ export const Home = () => {
 
   return (
     <Styles.Container>
+      <Debug content={cycles} />
       <form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <Styles.Inputs>
 
