@@ -17,3 +17,23 @@ export const remainingSecondsInCycle = (elapsedSeconds: number, cycle: Cycle | u
   
   return totalSeconds - elapsedSeconds;
 }
+
+export interface Time {
+  minute: string;
+  second: string;
+}
+
+export const remainingTime = (elapsedSeconds: number, cycle: Cycle | undefined): Time => {
+  const remainingSeconds = remainingSecondsInCycle(elapsedSeconds, cycle);
+  
+  const currentMinutes = Math.floor(remainingSeconds / 60);
+  const currentSeconds = remainingSeconds % 60;
+
+  const minute = String(currentMinutes).padStart(2, '0');
+  const second = String(currentSeconds).padStart(2, '0');
+
+  return {
+    minute,
+    second
+  }
+}

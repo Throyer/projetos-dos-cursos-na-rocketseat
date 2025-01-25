@@ -1,24 +1,23 @@
 import { HandPalm, Play } from "@phosphor-icons/react"
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import * as Styles from "./styles";
 
-import { newCycleValidationSchema } from "./components/new-cycle-form/validations";
 import { CreateCycleFormFields } from "./components/new-cycle-form/types";
-import { useEffect, useState } from "react";
-import { Cycle } from "./components/cycle";
-import { nanoid } from "nanoid";
-import { remainingSecondsInCycle, totalSecondsInCycle } from "@utils/total-seconds";
-import { differenceInSeconds } from "date-fns";
+import { newCycleValidationSchema } from "./components/new-cycle-form/validations";
+
 import { Debug } from "@utils/debug";
+import { Countdown } from "./components/countdown";
+import { NewCycleForm } from "./components/new-cycle-form";
+import { useCycles } from "../../contexts/cycles";
+
+
 
 export const Home = () => {
-  const [cycles, setCycles] = useState<Cycle[]>([]);
-  const [currentCycleId, setCurrentCycleId] = useState<string|null>(null);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const { currentCycle, createNewCycle, interruptCurrentCycle } = useCycles();
 
-  const { register, handleSubmit, watch, reset } = useForm<CreateCycleFormFields>({
+  const form = useForm<CreateCycleFormFields>({
     resolver: zodResolver(newCycleValidationSchema),
     defaultValues: {
       title: '',
@@ -26,153 +25,42 @@ export const Home = () => {
     },
   });
 
-  const handleCreateNewCycle = ({ minutes_amount, title }: CreateCycleFormFields) => {
-    const cycle: Cycle = {
-      id: nanoid(),
-      title,
-      started_at: new Date().toJSON(),
-      minutes_amount,
-      status: 'Em andamento'
-    }
-
-    setCycles(state => [cycle, ...state]);
-    setCurrentCycleId(cycle.id);
-    setElapsedSeconds(0);
-
+  const handleCreateNewCycle = ({ title, minutes_amount }: CreateCycleFormFields) => {
+    createNewCycle({ title, minutes_amount });
     reset();
   }
 
-  const currentCycle = cycles.find(cycle => cycle.id === currentCycleId);
-
-  useEffect(() => {
-    let interval: number | undefined = undefined;
-
-    if (currentCycle) {
-      interval = setInterval(() => {
-        const now = new Date();
-        const start = new Date(currentCycle.started_at);
-        const difference = differenceInSeconds(now, start); 
-
-        if (difference >= totalSecondsInCycle(currentCycle)) {
-          setCycles(state => state.map(cycle => {
-            if (cycle.id !== currentCycle.id) {
-              return cycle;
-            }
-    
-            cycle.status = 'Concluído';
-            cycle.finished_at = new Date().toJSON();
-    
-            return cycle;
-          }))
-    
-          setCurrentCycleId(null);
-          clearInterval(interval);
-          return;
-        }
-
-        setElapsedSeconds(difference);
-      }, 1000);
-    }
-
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    }
-  }, [currentCycle])
-
-  const remainingSeconds = remainingSecondsInCycle(elapsedSeconds, currentCycle);
-  
-  const currentMinutes = Math.floor(remainingSeconds / 60);
-  const currentSeconds = remainingSeconds % 60;
-
-  const minute = String(currentMinutes).padStart(2, '0');
-  const second = String(currentSeconds).padStart(2, '0');
-
-  useEffect(() => {
-    if (currentCycle) {
-      document.title = `${minute}:${second}`;
-      return;
-    }
-
-    document.title = 'Ignite Timer';
-  }, [currentCycle, minute, second])
-
-  const title = watch('title');
-  const minutes_amount = watch('minutes_amount');
-
-  const isSubmitDisabled = !title || !minutes_amount;
-
   const handleInterruptCurrentCycle = () => {
-    if (currentCycle) {
-      setCycles(state => state.map(cycle => {
-        if (cycle.id !== currentCycle.id) {
-          return cycle;
-        }
-
-        cycle.status = 'Interrompido';
-        cycle.interrupted_at = new Date().toJSON();
-
-        return cycle;
-      }))
-
-      setCurrentCycleId(null);
-    }
+    interruptCurrentCycle();
   }
+
+  const { handleSubmit, watch, reset } = form;
+
+  const disableSubmitButton = [watch('title'), watch('minutes_amount')]
+  .map(value => Boolean(value))
+  .some(value => !value);
+
+  const hasActiveCycle = Boolean(currentCycle);
 
   return (
     <Styles.Container>
-      <Debug content={cycles} />
+      <Debug content={{disableSubmitButton, hasActiveCycle}} />
       <form onSubmit={handleSubmit(handleCreateNewCycle)}>
-        <Styles.Inputs>
+          <FormProvider {...form}>
+            <NewCycleForm />
+          </FormProvider>
 
-          <label htmlFor="task">Vou trabalhar em</label>
-          <Styles.TaskInput
-            id="task"
-            type="text"
-            list="task-suggestions"            
-            placeholder="Dê um nome para o seu projeto"
-            disabled={Boolean(currentCycle)}
-            {...register('title')}
-          />
+          <Countdown />
 
-          <datalist id="task-suggestions">
-            <option value="Projeto 1" />
-            <option value="Projeto 2" />
-            <option value="Projeto 3" />
-            <option value="Projeto 4" />
-          </datalist>
-
-          <label htmlFor="minutesAmount">durante</label>
-          <Styles.MinutesAmountInput
-            type="number"
-            id="minutesAmount"
-            placeholder="00"
-            step={5}
-            min={5}
-            max={60}
-            disabled={Boolean(currentCycle)}
-            {...register('minutes_amount', { valueAsNumber: true })}
-          />
-
-          <span>minutos.</span>
-        </Styles.Inputs>
-
-        <Styles.Countdown>
-          <span>{minute[0]}</span>
-          <span>{minute[1]}</span>
-          <Styles.Separator>{':'}</Styles.Separator>
-          <span>{second[0]}</span>
-          <span>{second[1]}</span>
-        </Styles.Countdown>
-
-        {!currentCycle ? (
-          <Styles.StartButton disabled={isSubmitDisabled} type="submit">
+        {!hasActiveCycle && (
+          <Styles.StartButton disabled={disableSubmitButton} type="submit">
             <Play size={24} />
             Começar
           </Styles.StartButton>
-        ):(
-          <Styles.StopButton disabled={!isSubmitDisabled} onClick={handleInterruptCurrentCycle} type="button">
+        )}
+
+        {hasActiveCycle && (
+          <Styles.StopButton onClick={handleInterruptCurrentCycle} type="button">
             <HandPalm size={24} />
             Interromper
           </Styles.StopButton>
