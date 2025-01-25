@@ -1,3 +1,5 @@
+import { useCycles } from "../../contexts/cycles";
+import { Time } from "./components/time";
 import * as Styles from "./styles"
 
 const Statuses = {
@@ -6,40 +8,9 @@ const Statuses = {
   'Interrompido': 'red'
 } as const
 
-const FAKE_ITENS = [
-  {
-    "id": "1",
-    "title": "Tarefa 1",
-    "started_at": "Há cerca de duas horas",
-    "status": "Concluído"
-  },
-  {
-    "id": "2",
-    "title": "Tarefa 2",
-    "started_at": "Há cerca de três horas",
-    "status": "Em andamento"
-  },
-  {
-    "id": "3",
-    "title": "Tarefa 3",
-    "started_at": "Há cerca de uma hora",
-    "status": "Interrompido"
-  },
-  {
-    "id": "4",
-    "title": "Tarefa 4",
-    "started_at": "Há cerca de duas horas",
-    "status": "Concluído"
-  },
-  {
-    "id": "5",
-    "title": "Tarefa 5",
-    "started_at": "Há cerca de três horas",
-    "status": "Em andamento"
-  },
-];
-
 export const History = () => {
+  const { cycles } = useCycles();
+
   return (
     <Styles.Container>
       <h1>Meu Histórico</h1>
@@ -55,11 +26,13 @@ export const History = () => {
             </tr>
           </thead>
           <tbody>
-            {FAKE_ITENS.map(({ id, title, started_at, status }) => (
+            {cycles.map(({ id, title, minutes_amount, started_at, status }) => (
               <tr key={id}>
                 <td>{title}</td>
-                <td>20 minutos</td>
-                <td>{started_at}</td>
+                <td>{minutes_amount} minutos</td>
+                <td>
+                  <Time when={new Date(started_at)} />
+                </td>
                 <td>
                   <Styles.Status
                     statusColor={Statuses[status as keyof typeof Statuses]}
