@@ -7,7 +7,7 @@ import * as Styles from "./styles";
 import { CreateCycleFormFields } from "./components/new-cycle-form/types";
 import { newCycleValidationSchema } from "./components/new-cycle-form/validations";
 
-import { useCycles } from "../../contexts/cycles";
+import { useCycles } from "../../contexts/cycles/use-cycles";
 import { Countdown } from "./components/countdown";
 import { NewCycleForm } from "./components/new-cycle-form";
 

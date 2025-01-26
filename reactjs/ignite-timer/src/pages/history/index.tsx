@@ -1,4 +1,4 @@
-import { useCycles } from "../../contexts/cycles";
+import { useCycles } from "../../contexts/cycles/use-cycles";
 import { Time } from "./components/time";
 import * as Styles from "./styles"
 

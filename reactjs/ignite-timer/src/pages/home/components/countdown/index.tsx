@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import * as Styles from "./styles";
 
 import { remainingTime, totalSecondsInCycle } from "@utils/total-seconds";
-import { useCycles } from "../../../../contexts/cycles";
+import { useCycles } from "../../../../contexts/cycles/use-cycles";
 
 export const Countdown = () => {
   const { currentCycle, finishCurrentCycle } = useCycles();
