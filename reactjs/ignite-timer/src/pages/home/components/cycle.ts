@@ -9,3 +9,5 @@ export interface Cycle {
   minutes_amount: number,
   status: Status;
 }
+
+export type UpdateCycleProps = Pick<Cycle, 'title' | 'minutes_amount'>;

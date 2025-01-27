@@ -12,7 +12,7 @@ import { Countdown } from "./components/countdown";
 import { NewCycleForm } from "./components/new-cycle-form";
 
 export const Home = () => {
-  const { currentCycle, createNewCycle, interruptCurrentCycle } = useCycles();
+  const { currentCycle, addNewCycle, interruptCurrentCycle } = useCycles();
 
   const form = useForm<CreateCycleFormFields>({
     resolver: zodResolver(newCycleValidationSchema),
@@ -23,7 +23,7 @@ export const Home = () => {
   });
 
   const handleCreateNewCycle = ({ title, minutes_amount }: CreateCycleFormFields) => {
-    createNewCycle({ title, minutes_amount });
+    addNewCycle({ title, minutes_amount });
     reset();
   }
 

@@ -1,4 +1,5 @@
 import { Cycle } from "@pages/home/components/cycle";
+import { differenceInSeconds } from "date-fns";
 
 export const totalSecondsInCycle = (cycle: Cycle | undefined): number => {
   if (!cycle) {
@@ -36,4 +37,10 @@ export const remainingTime = (elapsedSeconds: number, cycle: Cycle | undefined):
     minute,
     second
   }
+}
+
+export const differenceInSecondsFromNow = (cycle: Cycle) => {
+  const now = new Date();
+  const start = new Date(cycle.started_at);
+  return differenceInSeconds(now, start);
 }
