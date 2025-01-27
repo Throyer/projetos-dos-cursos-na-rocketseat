@@ -4,7 +4,11 @@ import { createContext, PropsWithChildren, useEffect, useReducer, useState } fro
 import { cyclesReducer, CycleState } from "../../reducers/cycles";
 import { Actions } from "../../reducers/cycles/actions";
 
-const LOCAL_STORAGE_KEY = 'github.com/throyer:iginite-timer:cycles-state:1.0.0-alpha';
+const AUTHOR = 'http://github.com/throyer';
+const APP = 'pomodoro-timer';
+const VERSION = '1.0.0-alpha';
+const LOCAL_STORAGE_KEY_DESCRIPTION = 'cycles-state'
+const LOCAL_STORAGE_KEY = `${AUTHOR}:${APP}-${VERSION}:${LOCAL_STORAGE_KEY_DESCRIPTION}`;
 
 export interface CyclesContextProps {
   addNewCycle: (props: Pick<Cycle, 'title' | 'minutes_amount'>) => void;
@@ -14,27 +18,26 @@ export interface CyclesContextProps {
   cycles: Cycle[];
 }
 
+const defaultStateValue: CycleState = {
+  cycles: [],
+  currentCycleId: null
+}
+
 export const CyclesContext = createContext({} as CyclesContextProps);
 
 export const CyclesProvider = ({ children }: PropsWithChildren) => {
-  const [cyclesState, dispatch] = useReducer(cyclesReducer, {
-    cycles: [],
-    currentCycleId: null
-  }, () => {
+  const [cyclesState, dispatch] = useReducer(cyclesReducer, defaultStateValue, (initialState) => {
     const json = localStorage.getItem(LOCAL_STORAGE_KEY);
 
     if (!json) {
-      return {
-        cycles: [],
-        currentCycleId: null
-      }
+      return initialState
     }
 
     return JSON.parse(json) as CycleState;
   });
 
   const { cycles, currentCycleId } = cyclesState;
-  
+
   const currentCycle = cycles.find(cycle => cycle.id === currentCycleId);
 
   const [elapsedSeconds, setElapsedSeconds] = useState(() => {
@@ -67,7 +70,7 @@ export const CyclesProvider = ({ children }: PropsWithChildren) => {
 
     if (currentCycle) {
       interval = setInterval(() => {
-        const difference = differenceInSecondsFromNow(currentCycle); 
+        const difference = differenceInSecondsFromNow(currentCycle);
 
         if (difference >= totalSecondsInCycle(currentCycle)) {
           dispatch(Actions.finishCycle(currentCycle));
@@ -94,7 +97,7 @@ export const CyclesProvider = ({ children }: PropsWithChildren) => {
       return;
     }
 
-    document.title = 'Ignite Timer';
+    document.title = 'Pomodoro Timer';
   }, [currentCycle, time])
 
   return (
