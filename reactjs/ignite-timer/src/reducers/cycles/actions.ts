@@ -1,8 +1,8 @@
-import { nanoid } from "nanoid";
 import { Cycle, UpdateCycleProps } from "@pages/home/components/cycle";
-import { CycleActionType } from ".";
+import { nanoid } from "nanoid";
+import { CycleAction } from ".";
 
-const addNewCycle = ({ minutes_amount, title }: UpdateCycleProps) => {
+const addNewCycle = ({ minutes_amount, title }: UpdateCycleProps): CycleAction<Cycle> => {
   const cycle: Cycle = {
     id: nanoid(),
     title,
@@ -12,27 +12,45 @@ const addNewCycle = ({ minutes_amount, title }: UpdateCycleProps) => {
   }
 
   return {
-    type: CycleActionType.ADD,
+    type: 'ADD',
     payload: {
       data: cycle
     }
   };
 }
 
-const stopCycle = (cycle: Cycle) => {
+const stopCycle = (cycle: Cycle): CycleAction<Cycle> => {
   return {
-    type: CycleActionType.STOP,
+    type: 'STOP',
     payload: {
       data: cycle
     }
   }
 }
 
-const finishCycle = (cycle: Cycle) => {
+const finishCycle = (cycle: Cycle): CycleAction<Cycle> => {
   return {
-    type: CycleActionType.FINISHED,
+    type: 'FINISHED',
     payload: {
       data: cycle
+    }
+  }
+}
+
+const removeCycle = (id: string): CycleAction<string> => {
+  return {
+    type: 'REMOVE',
+    payload: {
+      data: id
+    }
+  }
+}
+
+const restartCycle = (id: string): CycleAction<string> => {
+  return {
+    type: 'RESTART',
+    payload: {
+      data: id
     }
   }
 }
@@ -40,5 +58,7 @@ const finishCycle = (cycle: Cycle) => {
 export const Actions = {
   addNewCycle,
   stopCycle,
-  finishCycle
+  finishCycle,
+  removeCycle,
+  restartCycle
 }

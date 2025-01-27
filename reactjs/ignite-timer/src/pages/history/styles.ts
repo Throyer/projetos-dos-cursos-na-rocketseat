@@ -18,7 +18,7 @@ export const Content = styled.div`
   overflow: auto;
   margin-top: 2rem;
   overflow-y: scroll;
-  max-height: 23rem;
+  max-height: 30rem;
 
   border-radius: 8px;
 
@@ -81,7 +81,7 @@ export const Content = styled.div`
       line-height: 1.6;
 
       &:first-child {
-        width: 50%;
+        width: 40%;
         padding-left: 1.5rem;
       }
 
@@ -115,5 +115,47 @@ export const Status = styled.span<StatusProps>`
 
     background: ${({ theme, statusColor }) =>
       theme[ColorOptions[statusColor || 'green']]};
+  }
+`
+
+export const Button = styled.button`
+  border: none;
+  background-color: transparent;
+  border-radius: 4px;
+
+  padding: 5px 4px 0px 4px;
+  margin: 0.2rem 0.2rem;
+  
+  transition: 0.2s background-color;
+
+  line, path {
+    transition: 0.2s fill;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`
+
+export const ButtonDanger = styled(Button)`
+  &:not(:disabled):hover {
+    background-color: ${({ theme }) => theme['red-500']};
+    cursor: pointer;
+
+    line, path {
+      fill: ${({ theme }) => theme['white']};
+    }
+  }
+`
+
+export const ButtonSuccess = styled(Button)`
+  &:not(:disabled):hover {
+    background-color: ${({ theme }) => theme['green-500']};
+    cursor: pointer;
+
+    line, path {
+      fill: ${({ theme }) => theme['white']};
+    }
   }
 `

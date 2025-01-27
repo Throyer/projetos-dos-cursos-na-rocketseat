@@ -13,6 +13,8 @@ const LOCAL_STORAGE_KEY = `${AUTHOR}:${APP}-${VERSION}:${LOCAL_STORAGE_KEY_DESCR
 export interface CyclesContextProps {
   addNewCycle: (props: Pick<Cycle, 'title' | 'minutes_amount'>) => void;
   interruptCurrentCycle: () => void;
+  removeCycle: (id: string) => void;
+  restartCycle: (id: string) => void;
   remainingTime: Time;
   currentCycle?: Cycle;
   cycles: Cycle[];
@@ -60,6 +62,22 @@ export const CyclesProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
+  const removeCycle = (id: string) => {
+    if (currentCycleId === id) {
+      return;
+    }
+
+    dispatch(Actions.removeCycle(id));
+  }
+
+  const restartCycle = (id: string) => {
+    if (currentCycleId === id) {
+      return;
+    }
+
+    dispatch(Actions.restartCycle(id));
+  }
+
   useEffect(() => {
     const json = JSON.stringify(cyclesState);
     localStorage.setItem(LOCAL_STORAGE_KEY, json);
@@ -104,6 +122,8 @@ export const CyclesProvider = ({ children }: PropsWithChildren) => {
     <CyclesContext.Provider value={{
       addNewCycle,
       interruptCurrentCycle,
+      removeCycle,
+      restartCycle,
       remainingTime: time,
       currentCycle,
       cycles
